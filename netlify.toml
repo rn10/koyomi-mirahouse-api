@@ -3,7 +3,7 @@
   # 公開するフォルダを指定します。今回はプロジェクトのルートにあるindex.htmlを公開します。
   publish = "."
   # サーバーレス関数が置かれているフォルダを指定します。
-  functions = "netlify/functions"
+  functions = "functions"
 
 # ビルド時に使用する環境変数を設定します
 [build.environment]
