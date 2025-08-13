@@ -1,9 +1,20 @@
 {
+  "version": 2,
   "builds": [
     {
       "src": "api/koyomi.py",
       "use": "@vercel/python"
     }
   ],
+  "routes": [
+    {
+      "src": "/api/koyomi",
+      "dest": "/api/koyomi.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
 }
 
