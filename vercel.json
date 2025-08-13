@@ -10,10 +10,14 @@
       "use": "@vercel/static"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/koyomi",
-      "dest": "api/koyomi.py"
+      "source": "/api/koyomi",
+      "destination": "/api/koyomi.py"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
