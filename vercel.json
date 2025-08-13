@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "api/koyomi.py": {
+      "runtime": "vercel-python@3.0.0"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/koyomi",
+      "dest": "/api/koyomi.py"
+    }
+  ]
+}

@@ -1,21 +1,23 @@
-import json
+from flask import Flask, jsonify
+from flask_cors import CORS
 import ephem
 import datetime
 import pytz
 
+app = Flask(__name__)
+# CORSを有効にして、ブログからのアクセスを許可します
+CORS(app)
+
 def format_time(dt):
-    """時刻をHH:MM形式の文字列にフォーマットするヘルパー関数"""
     if dt is None:
         return "--:--"
     return dt.strftime('%H:%M')
 
-def handler(event, context):
-    """
-    Netlifyから呼び出されるメインの関数。
-    暦の情報を計算し、JSON形式で返す。
-    """
+# Vercelでは、ファイル名をエンドポイントとして /api/koyomi でアクセスされます
+@app.route('/api/koyomi', methods=['GET'])
+def get_koyomi_data():
     try:
-        # --- 基本設定 ---
+        # --- 基本設定 (内容は変更なし) ---
         locations = [
             {"name": "札幌", "lat": "43.06", "lon": "141.35"},
             {"name": "仙台", "lat": "38.27", "lon": "140.87"},
@@ -32,7 +34,7 @@ def handler(event, context):
         }
         kou_list = list(kou_data.keys())
 
-        # --- 計算処理 ---
+        # --- 計算処理 (内容は変更なし) ---
         JST = pytz.timezone('Asia/Tokyo')
         now_jst = datetime.datetime.now(JST)
         
@@ -97,19 +99,10 @@ def handler(event, context):
             "cities": city_data
         }
 
-        return {
-            "statusCode": 200,
-            "headers": {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*", # どのサイトからのアクセスも許可する設定
-            },
-            "body": json.dumps(response_data, ensure_ascii=False)
-        }
+        # Flaskのjsonifyを使ってJSONレスポンスを返す
+        return jsonify(response_data)
 
     except Exception as e:
         print(f"Error occurred: {e}")
-        return {
-            "statusCode": 500,
-            "body": json.dumps({"error": "An internal error occurred"})
-        }
+        return jsonify({"error": "An internal error occurred"}), 500
 
