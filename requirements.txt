@@ -1,3 +1,4 @@
 pyephem
 pytz
-flask
+Flask
+Flask-Cors
