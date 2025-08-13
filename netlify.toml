@@ -1,0 +1,11 @@
+# Netlifyの基本的なビルド設定
+[build]
+  # 公開するフォルダを指定します。今回はプロジェクトのルートにあるindex.htmlを公開します。
+  publish = "."
+  # サーバーレス関数が置かれているフォルダを指定します。
+  functions = "netlify/functions"
+
+# サーバーレス関数の設定
+[functions]
+  # Python関数が含まれていることをNetlifyに伝えます。
+  # この設定により、Netlifyは自動的にrequirements.txtをインストールしてくれます。
