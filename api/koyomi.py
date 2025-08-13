@@ -34,7 +34,7 @@ def get_koyomi_data():
         }
         kou_list = list(kou_data.keys())
 
-        # --- 計算処理 (内容は変更なし) ---
+        # --- 計算処理 ---
         JST = pytz.timezone('Asia/Tokyo')
         now_jst = datetime.datetime.now(JST)
         
@@ -66,11 +66,13 @@ def get_koyomi_data():
             obs.lat = loc['lat']
             obs.date = start_of_day_jst
             
-            obs.horizon = '-0:34' 
-            sunrise_utc = obs.next_rising(ephem.Sun(), use_center=True).datetime()
-            sunset_utc = obs.next_setting(ephem.Sun(), use_center=True).datetime()
+            # --- 計算ロジック修正箇所 ---
+            # ephemのデフォルト（太陽の上辺を基準とし、大気差を考慮）に戻します。
+            # これにより、元のコードとほぼ同じ時刻が算出されます。
+            sunrise_utc = obs.next_rising(ephem.Sun()).datetime()
+            sunset_utc = obs.next_setting(ephem.Sun()).datetime()
 
-            obs.horizon = '0' 
+            # 月の計算は変更なし
             try:
                 moonrise_utc = obs.next_rising(ephem.Moon()).datetime()
                 moonrise_jst = moonrise_utc.astimezone(JST)
