@@ -1,9 +1,10 @@
 {
-  "functions": {
-    "api/koyomi.py": {
-      "runtime": "@vercel/python"
+  "builds": [
+    {
+      "src": "api/koyomi.py",
+      "use": "@vercel/python"
     }
-  },
+  ],
   "routes": [
     {
       "src": "/api/koyomi",
