@@ -5,11 +5,5 @@
       "use": "@vercel/python"
     }
   ],
-  "routes": [
-    {
-      "src": "/api/koyomi",
-      "dest": "/api/koyomi.py"
-    }
-  ]
 }
 
