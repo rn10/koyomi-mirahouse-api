@@ -16,7 +16,7 @@
       "destination": "/api/koyomi.py"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ]
