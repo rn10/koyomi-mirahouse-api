@@ -9,3 +9,4 @@
 [functions]
   # Python関数が含まれていることをNetlifyに伝えます。
   # この設定により、Netlifyは自動的にrequirements.txtをインストールしてくれます。
+  "koyomi" = { runtime = "python3.11" }
