@@ -1,4 +1,10 @@
 {
+  "builds": [
+    {
+      "src": "api/koyomi.py",
+      "use": "@vercel/python"
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/koyomi",
